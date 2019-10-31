@@ -32,15 +32,15 @@ const App = () => {
       />
       <Questionnaire
         questions={Questions}
-        showNavigation={true}
         showPrefix={true}
-        prefixType={'dot'}
-        backBtnText={'Vorige'}
+        showNavigation={true}
         onFinish={result => {
           console.log(result);
         }}
-        nextBtnText={'Volgende'}
         progressPadding={30}
+        renderNextCards={true}
+        animationInterval={150}
+        nextCardsColor={'#fff'}
         questionWrapperStyle={styles.questionWrapperStyle}
         answerWrapperStyle={styles.answerWrapperStyle}
         selectedAnswerWrapperStyle={styles.selectedAnswerWrapperStyle}

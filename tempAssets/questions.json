@@ -1,38 +1,42 @@
 [
   {
-    "question": "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-    "answers": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing."
-    ],
+    "question": "Is de pijn constant aanwezig? Is er geen enkele houding die de pijn doet verminderen?",
+    "answers": ["Ja", "Nee"],
     "id": 1
   },
   {
-    "question": "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-    "answers": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing."
-    ],
+    "question": "Heb je een gevoelloze zone rond je achterwerk en/of de binnenkant van je dijen?",
+    "answers": ["Ja", "Nee"],
     "id": 2
   },
   {
-    "question": "3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-    "answers": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing."
-    ],
+    "question": "Is er verandering in je menstruatiepatroon? Heb je tussentijdse bloedingen?",
+    "answers": ["Ja", "Nee"],
     "id": 3
   },
   {
-    "question": "4 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-    "answers": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing."
-    ],
+    "question": "Kan je maar een kort eind wandelen en moet je dan stoppen omwille van té felle rugpijn of pijn in je been?",
+    "answers": ["Ja", "Nee"],
     "id": 4
+  },
+  {
+    "question": "Is de pijn constant aanwezig? Is er geen enkele houding die de pijn doet verminderen?",
+    "answers": ["Ja", "Nee"],
+    "id": 5
+  },
+  {
+    "question": "Heb je een gevoelloze zone rond je achterwerk en/of de binnenkant van je dijen?",
+    "answers": ["Ja", "Nee"],
+    "id": 6
+  },
+  {
+    "question": "Is er verandering in je menstruatiepatroon? Heb je tussentijdse bloedingen?",
+    "answers": ["Ja", "Nee"],
+    "id": 7
+  },
+  {
+    "question": "Kan je maar een kort eind wandelen en moet je dan stoppen omwille van té felle rugpijn of pijn in je been?",
+    "answers": ["Ja", "Nee"],
+    "id": 8
   }
 ]

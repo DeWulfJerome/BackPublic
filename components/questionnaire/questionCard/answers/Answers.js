@@ -15,6 +15,7 @@ const Answers = props => {
     return answers.map((val, index) => {
       return (
         <Answer
+          slideAnim={props.slideAnim}
           selectedAnswer={selectedAnswer}
           answerWrapperStyle={props.answerWrapperStyle}
           answerTextStyle={props.answerTextStyle}

@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  Animated,
+  Easing,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import Prefix from './Prefix';
 
 const Answer = props => {
@@ -17,36 +23,44 @@ const Answer = props => {
   });
 
   return (
-    <TouchableOpacity
-      style={
-        [
-          props.answerWrapperStyle,
-          selected ? props.selectedAnswerWrapperStyle : null,
-        ] || [answerStyle.answerWrapper, selected ? answerStyle.selected : null]
-      }
-      onPress={() => {
-        selectThis();
-        //setSelected(!selected);
-      }}>
-      <Prefix
-        showPrefix={props.showPrefix}
-        selected={selected}
-        answerIndex={props.index}
-        dotStyle={props.dotStyle}
-        prefixType={props.prefixType}></Prefix>
-
-      <Text
+    <Animated.View style={{transform: [{translateX: props.slideAnim}]}}>
+      <TouchableOpacity
         style={
-          props.answerTextStyle
-            ? [props.answerTextStyle, selected && props.selectedAnswerTextStyle]
-            : [
-                answerStyle.textStyle,
-                selected ? answerStyle.selectedText : null,
-              ]
-        }>
-        {props.question}
-      </Text>
-    </TouchableOpacity>
+          [
+            props.answerWrapperStyle,
+            selected ? props.selectedAnswerWrapperStyle : null,
+          ] || [
+            answerStyle.answerWrapper,
+            selected ? answerStyle.selected : null,
+          ]
+        }
+        onPress={() => {
+          selectThis();
+          //setSelected(!selected);
+        }}>
+        <Prefix
+          showPrefix={props.showPrefix}
+          selected={selected}
+          answerIndex={props.index}
+          dotStyle={props.dotStyle}
+          prefixType={props.prefixType}></Prefix>
+
+        <Text
+          style={
+            props.answerTextStyle
+              ? [
+                  props.answerTextStyle,
+                  selected && props.selectedAnswerTextStyle,
+                ]
+              : [
+                  answerStyle.textStyle,
+                  selected ? answerStyle.selectedText : null,
+                ]
+          }>
+          {props.question}
+        </Text>
+      </TouchableOpacity>
+    </Animated.View>
   );
 };
 
