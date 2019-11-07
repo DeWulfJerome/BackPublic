@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 const darkBlue = '#6692C1';
+const mediumBlue = '#C6D2E6';
 const lightBlue = '#F1F9FF';
 
 const styles = StyleSheet.create({
