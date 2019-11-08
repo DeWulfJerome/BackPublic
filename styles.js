@@ -1,10 +1,18 @@
 import {StyleSheet} from 'react-native';
-
-const darkBlue = '#6692C1';
-const mediumBlue = '#C6D2E6';
-const lightBlue = '#F1F9FF';
+import StyleConstants from './StyleConstants';
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: StyleConstants.font.sizes.large,
+    fontFamily: 'Lato-Bold',
+    color: StyleConstants.colors.blue.dark,
+    marginBottom: StyleConstants.margins.small,
+  },
+  subTitle: {
+    fontSize: StyleConstants.font.sizes.normal,
+    fontFamily: 'Lato-Regular',
+    color: StyleConstants.colors.blue.dark,
+  },
   questionWrapperStyle: {
     backgroundColor: '#fff',
     alignSelf: 'stretch',
@@ -32,7 +40,7 @@ const styles = StyleSheet.create({
   },
   questionTextStyle: {
     fontSize: 24,
-    color: darkBlue,
+    color: StyleConstants.colors.blue.dark,
     fontWeight: '600',
     marginTop: 20,
     marginBottom: 20,

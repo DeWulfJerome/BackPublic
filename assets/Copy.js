@@ -1,8 +1,13 @@
 const Copy = {
   NL: {
     login: {
+      name: 'Naam',
       email: 'Email',
-      password: 'Password',
+      password: 'Wachtwoord',
+      repeatPassword: 'Wachtwoord herhalen',
+      passwordMatch: 'Wachtwoorden zijn niet identiek',
+      welcome: 'Welkom',
+      createAccount: 'Maak een account aan',
     },
   },
 };

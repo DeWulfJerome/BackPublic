@@ -9,17 +9,15 @@ import Input from '../../components/inputs/Input';
 
 const LoginForm = props => {
   const [form, setForm] = useState({
-    email: 'test',
+    email: '',
     password: '',
   });
 
   const changeFormData = (field, text) => {
-    // working here
     setForm({
       ...form,
-      field: text,
+      [field]: text,
     });
-    console.log(form);
   };
 
   return (

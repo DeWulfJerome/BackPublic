@@ -1,11 +1,19 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
 import StyleConstants from '../../StyleConstants';
 
 const Button = props => {
   return (
     <TouchableOpacity
+      onPress={() => {
+        props.onPress();
+      }}
       style={[
         buttonStyles.wrapperStyle,
         props.filled ? buttonStyles.filledButton : null,
@@ -17,6 +25,14 @@ const Button = props => {
         ]}>
         {props.text}
       </Text>
+      {props.loading && (
+        <ActivityIndicator
+          color={
+            props.filled
+              ? StyleConstants.colors.white
+              : StyleConstants.colors.blue.dark
+          }></ActivityIndicator>
+      )}
     </TouchableOpacity>
   );
 };
@@ -24,6 +40,7 @@ const Button = props => {
 const buttonStyles = StyleSheet.create({
   wrapperStyle: {
     alignSelf: 'stretch',
+    flexDirection: 'row',
     borderWidth: StyleConstants.border.width.medium,
     borderColor: StyleConstants.colors.blue.medium,
     padding: StyleConstants.padding.medium,
@@ -41,6 +58,7 @@ const buttonStyles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 12,
     color: StyleConstants.colors.blue.dark,
+    marginRight: StyleConstants.margins.small,
   },
   filledText: {
     color: StyleConstants.colors.white,

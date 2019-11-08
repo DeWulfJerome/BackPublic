@@ -35,6 +35,8 @@ const barStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
 });
 

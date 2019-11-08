@@ -1,21 +1,24 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
-import {View} from 'react-native';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
-import Login from './screens/Login';
+import reducers from './Model/rootReducer';
+
+//fix font bug
+import TextWrapper from './utils/TextWrapper';
+TextWrapper();
+
+import AppContainer from './navigation/Appstack';
+
+const middleWare = applyMiddleware(thunk);
+const store = createStore(reducers, middleWare);
 
 const App = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center'}}>
-      <Login></Login>
-    </View>
+    <Provider store={store}>
+      <AppContainer></AppContainer>
+    </Provider>
   );
 };
 

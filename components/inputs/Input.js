@@ -11,9 +11,13 @@ const Input = props => {
       style={[
         inputStyles.wrapperStyle,
         focused ? inputStyles.focusedInputWrapper : null,
+        props.error ? inputStyles.errorInputWrapper : null,
       ]}>
       <TextInput
-        style={inputStyles.inputStyle}
+        style={[
+          inputStyles.inputStyle,
+          props.error ? inputStyles.errorInputStyle : null,
+        ]}
         placeholder={props.placeholder}
         secureTextEntry={props.password}
         autoCapitalize={'none'}
@@ -46,10 +50,16 @@ const inputStyles = StyleSheet.create({
   focusedInputWrapper: {
     borderColor: StyleConstants.colors.blue.dark,
   },
+  errorInputWrapper: {
+    borderColor: StyleConstants.colors.red.light,
+  },
   inputStyle: {
     padding: StyleConstants.padding.medium,
     flex: 1,
     color: StyleConstants.colors.blue.dark,
+  },
+  errorInputStyle: {
+    color: StyleConstants.colors.red.dark,
   },
 });
 
