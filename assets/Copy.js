@@ -8,6 +8,9 @@ const Copy = {
       passwordMatch: 'Wachtwoorden zijn niet identiek',
       welcome: 'Welkom',
       createAccount: 'Maak een account aan',
+      loginText: 'Meld je aan om verder te gaan',
+      hasNoAccount: 'Nog geen account? Maak er een aan.',
+      hasAccount: 'Al een account? Meld je aan.',
     },
   },
 };

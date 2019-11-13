@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 import StyleConstants from '../../StyleConstants';
 import Copy from '../../assets/Copy';
+import styles from '../../styles';
 
 import {setJWTToken} from '../../controllers/auth/auth';
 
@@ -51,6 +52,10 @@ const LoginForm = props => {
 
   return (
     <View style={loginFormStyle.containerStyle}>
+      <View style={loginFormStyle.textWrapper}>
+        <Text style={styles.title}>{Copy.NL.login.welcome}</Text>
+        <Text style={styles.subTitle}>{Copy.NL.login.loginText}</Text>
+      </View>
       <Input
         placeholder={Copy.NL.login.email}
         onChangeText={text => {
