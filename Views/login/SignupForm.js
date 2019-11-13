@@ -12,10 +12,10 @@ import Input from '../../components/inputs/Input';
 
 const SignupForm = props => {
   const [form, setForm] = useState({
-    name: 'Jerome',
-    email: 'jerome@flux.be',
-    password: 'test123',
-    password2: 'test123',
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
   });
 
   const [passError, setPassError] = useState(false);
@@ -45,7 +45,13 @@ const SignupForm = props => {
         .then(response => {
           setSignupError({loading: false, error: false, val: ''});
           props.dispatch(setJWTToken(form.email, form.password)).then(() => {
+            setSignupError({
+              loading: false,
+              error: false,
+              val: '',
+            });
             // Go to app
+            props.navProps.navigate('App');
           });
         })
         .catch(error => {
@@ -121,6 +127,7 @@ const loginFormStyle = StyleSheet.create({
   errorText: {
     color: StyleConstants.colors.red.dark,
     marginBottom: StyleConstants.margins.medium,
+    alignSelf: 'center',
   },
   textWrapper: {
     marginBottom: StyleConstants.margins.large,

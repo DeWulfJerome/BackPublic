@@ -4,11 +4,10 @@ import {connect} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
 
-import LoginForm from '../../Views/login/LoginForm';
+import SignupForm from '../../Views/login/SignupForm';
 
-class Login extends React.Component {
+class SignUp extends React.Component {
   render() {
-    console.log(this.props.token);
     return (
       <View style={loginStyles.containerStyle}>
         <KeyboardAvoidingView
@@ -18,9 +17,9 @@ class Login extends React.Component {
             source={require('../../assets/Logo/logo.png')}
             style={loginStyles.logoStyle}></Image>
 
-          <LoginForm
+          <SignupForm
             navProps={this.props.navigation}
-            dispatch={this.props.dispatch}></LoginForm>
+            dispatch={this.props.dispatch}></SignupForm>
         </KeyboardAvoidingView>
       </View>
     );
@@ -44,4 +43,4 @@ const loginStyles = StyleSheet.create({
   logoStyle: StyleConstants.logoSizes.large,
 });
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(SignUp);

@@ -51,6 +51,9 @@ const StyleConstants = {
       medium: 20,
       large: 30,
     },
+    weight: {
+      thicc: 'bold',
+    },
   },
   logoSizes: {
     large: {

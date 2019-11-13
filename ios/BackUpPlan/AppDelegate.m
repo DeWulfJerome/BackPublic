@@ -10,6 +10,10 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+/**
+ *add react native splash screen
+ */
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -27,6 +31,10 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  /**
+   *show react native splash screen
+   */
+  [RNSplashScreen show];
   return YES;
 }
 

@@ -38,8 +38,28 @@ export const setJWTToken = (email, password) => {
         })
         .catch(error => {
           //handle errors
-          reject(err.response.data.message);
+          let strippedResponse = error.response.data.message
+            .replace(/<[^>]*>?/gm, '')
+            .replace('Lost your password?', '');
+          reject(strippedResponse);
         });
     });
   };
+};
+
+export const validateJWTToken = async token => {
+  if (null !== token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    return axios
+      .post(
+        'https://fluxwebdesign5.be/customer/back-up-plan/wp-json/jwt-auth/v1/token/validate',
+      )
+      .then(response => {
+        return response.data.code;
+      })
+      .catch(err => {
+        return err;
+      });
+  }
 };
