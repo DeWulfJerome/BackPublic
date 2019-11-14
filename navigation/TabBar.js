@@ -19,18 +19,21 @@ const TabBar = props => {
 
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: StyleConstants.padding.small,
-        backgroundColor: StyleConstants.colors.blue.light,
-        position: 'absolute',
-        bottom: StyleConstants.margins.medium,
-        left: StyleConstants.margins.medium,
-        right: StyleConstants.margins.medium,
-        borderRadius: StyleConstants.border.radius.medium,
-      }}>
+      style={[
+        {
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          padding: StyleConstants.padding.small,
+          backgroundColor: StyleConstants.colors.blue.light,
+          position: 'absolute',
+          bottom: StyleConstants.margins.medium,
+          left: StyleConstants.margins.medium,
+          right: StyleConstants.margins.medium,
+          borderRadius: StyleConstants.border.radius.medium,
+        },
+        StyleConstants.shadow.top,
+      ]}>
       {routes.map((route, routeIndex) => {
         const isRouteActive = routeIndex === activeRouteIndex;
         const tintColor = isRouteActive ? activeTintColor : inactiveTintColor;

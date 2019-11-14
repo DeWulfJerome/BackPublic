@@ -36,7 +36,7 @@ const TabBarIcon = props => {
     Animated.timing(sizeAnim, {
       toValue: 40,
       duration: 150,
-      easing: Easing.elastic(1),
+      easing: Easing.elastic(0),
     }).start();
   };
 

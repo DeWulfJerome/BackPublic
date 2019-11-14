@@ -14,6 +14,15 @@ const StyleConstants = {
       light: '#DD8C82',
     },
     white: '#fff',
+    grey: {
+      //change
+      dark: '#f2f2f2',
+      medium: '#f2f2f2',
+      light: '#f2f2f2',
+    },
+    black: {
+      fontBlack: '#2d2d2d',
+    },
   },
   margins: {
     small: 10,
@@ -35,6 +44,7 @@ const StyleConstants = {
       small: 5,
       medium: 10,
       large: 20,
+      full: 100,
     },
   },
   placeholder: {
@@ -67,6 +77,41 @@ const StyleConstants = {
     small: {
       height: deviceWidth * 0.8 * 0.5714 * 0.6,
       width: deviceWidth * 0.8 * 0.6,
+    },
+  },
+  shadow: {
+    top: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
+
+      elevation: 4,
+    },
+    middle: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+
+      elevation: 3,
+    },
+    bottom: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.18,
+      shadowRadius: 1.0,
+
+      elevation: 1,
     },
   },
 };

@@ -31,6 +31,10 @@ export const setJWTToken = (email, password) => {
         .then(tokenResponse => {
           // Set token in AsyncStorage
           AsyncStorage.setItem('auth', tokenResponse.data.token);
+          // Set token in headers
+          axios.defaults.headers.common[
+            'Authorization'
+          ] = `Bearer ${tokenResponse.data.token}`;
           // Set token in store
           dispatch({type: 'SET_JWT_TOKEN', token: tokenResponse.data.token});
           //resolve
@@ -49,8 +53,6 @@ export const setJWTToken = (email, password) => {
 
 export const validateJWTToken = async token => {
   if (null !== token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
     return axios
       .post(
         'https://fluxwebdesign5.be/customer/back-up-plan/wp-json/jwt-auth/v1/token/validate',

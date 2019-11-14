@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {View, Image, AsyncStorage} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import axios from 'axios';
 
 import StyleConstants from '../../StyleConstants';
 
@@ -21,6 +22,7 @@ const Loading = props => {
 
     if (userToken) {
       // Validate token
+      axios.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
       const validatedToken = await validateJWTToken(userToken);
       if (validatedToken === 'jwt_auth_valid_token') {
         // Hydrate store

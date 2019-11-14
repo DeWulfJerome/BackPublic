@@ -1,17 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
+import StyleConstants from '../StyleConstants';
+import styles from '../styles';
+
 import TabBar from './TabBar';
 import TabBarIcon from './TabBarIcon';
-import Feed from '../screens/app/Feed';
-import Profile from '../screens/app/Profile';
-import Badges from '../screens/app/Badges';
+import Feed from '../screens/main/Feed';
+import Profile from '../screens/main/Profile';
+import Badges from '../screens/main/Badges';
 import Login from '../screens/auth/Login';
 import SignUp from '../screens/auth/SignUp';
 import Loading from '../screens/auth/Loading';
+
+import ListItemDetails from '../screens/feed/ListItemDetails';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -30,10 +34,50 @@ const AuthStack = createStackNavigator({
   },
 });
 
+const FeedStack = createStackNavigator({
+  Feed: {
+    screen: Feed,
+    navigationOptions: () => ({
+      title: 'Feed',
+
+      headerStyle: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+  ListItemDetail: {
+    screen: ListItemDetails,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.title || 'details'}`,
+      headerStyle: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+});
+
 const MainStack = createBottomTabNavigator(
   {
     Badges: Badges,
-    Feed: Feed,
+    Feed: FeedStack,
     Profiel: Profile,
   },
   {
