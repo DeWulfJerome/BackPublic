@@ -19,7 +19,7 @@ const Feed = props => {
         }}>
         <FAB
           onPress={() => {
-            console.log('qsdf');
+            props.navigation.navigate('AllActivities');
           }}></FAB>
       </View>
     </View>

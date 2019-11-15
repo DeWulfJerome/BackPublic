@@ -21,7 +21,8 @@ const StyleConstants = {
       light: '#f2f2f2',
     },
     black: {
-      fontBlack: '#2d2d2d',
+      fontBlack: '#393D42',
+      subFontBlack: '#909396',
     },
   },
   margins: {
@@ -33,6 +34,7 @@ const StyleConstants = {
     small: 10,
     medium: 20,
     large: 30,
+    navAvoider: 100,
   },
   border: {
     width: {
@@ -59,9 +61,16 @@ const StyleConstants = {
       small: 11,
       normal: 16,
       medium: 20,
+      mediumLarge: 25,
       large: 30,
     },
+    lineheight: {
+      normal: 25,
+      medium: 32,
+    },
     weight: {
+      normal: '400',
+      title: '600',
       thicc: 'bold',
     },
   },

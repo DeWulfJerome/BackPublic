@@ -4,14 +4,20 @@ import StyleConstants from './StyleConstants';
 const styles = StyleSheet.create({
   title: {
     fontSize: StyleConstants.font.sizes.large,
-    fontFamily: 'Lato-Bold',
-    color: StyleConstants.colors.blue.dark,
     marginBottom: StyleConstants.margins.small,
+    color: StyleConstants.colors.blue.dark,
+    fontWeight: StyleConstants.font.weight.title,
   },
   subTitle: {
     fontSize: StyleConstants.font.sizes.normal,
     fontFamily: 'Lato-Regular',
     color: StyleConstants.colors.blue.dark,
+  },
+  normalText: {
+    fontSize: StyleConstants.font.sizes.normal,
+    lineHeight: StyleConstants.font.lineheight.normal,
+    color: StyleConstants.colors.black.subFontBlack,
+    fontWeight: StyleConstants.font.weight.normal,
   },
   questionWrapperStyle: {
     backgroundColor: '#fff',

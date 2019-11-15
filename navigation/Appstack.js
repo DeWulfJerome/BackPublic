@@ -16,6 +16,7 @@ import SignUp from '../screens/auth/SignUp';
 import Loading from '../screens/auth/Loading';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
+import AllActivities from '../screens/feed/AllActivities';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -58,6 +59,24 @@ const FeedStack = createStackNavigator({
     screen: ListItemDetails,
     navigationOptions: ({navigation}) => ({
       title: `${navigation.state.params.title || 'details'}`,
+      headerStyle: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+  AllActivities: {
+    screen: AllActivities,
+    navigationOptions: ({navigation}) => ({
+      title: 'Jouw activiteiten',
       headerStyle: [
         {
           backgroundColor: StyleConstants.colors.blue.light,

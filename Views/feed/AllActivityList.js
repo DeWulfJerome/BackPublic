@@ -4,9 +4,9 @@ import {ScrollView} from 'react-native';
 import StyleConstants from '../../StyleConstants';
 
 import ListItem from '../../components/Lists/ListItem';
-import FeedContent from './FeedContent';
+import AllActivityContent from './AllActivityContent';
 
-const FeedList = props => {
+const AllActivityList = props => {
   const feed = [
     {title: 'Bekken bridge topexpert', sub: '10 min'},
     {title: 'Buikspieren 1', sub: '5 min'},
@@ -27,11 +27,13 @@ const FeedList = props => {
             props.navProps.navigate('ListItemDetail', {
               title: val.title,
               image: 'weight',
-              from: 'FeedList',
+              from: 'AllActivityList',
             });
           }}
           uri={require('../../assets/Glasses/weightLift.png')}
-          content={<FeedContent title={val.title} sub={val.sub} />}></ListItem>
+          content={
+            <AllActivityContent title={val.title} sub={val.sub} />
+          }></ListItem>
       );
     });
   };
@@ -45,4 +47,4 @@ const FeedList = props => {
   );
 };
 
-export default FeedList;
+export default AllActivityList;
