@@ -12,10 +12,10 @@ import Input from '../../components/inputs/Input';
 
 const SignupForm = props => {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
+    name: 'jerome',
+    email: 'jerome.dewulf@hotmail.com',
+    password: 'test123',
+    password2: 'test123',
   });
 
   const [passError, setPassError] = useState(false);
@@ -41,7 +41,7 @@ const SignupForm = props => {
         ...signupError,
         loading: true,
       });
-      createAccount(form.email, form.password)
+      createAccount(form.email, form.password, form.name)
         .then(response => {
           setSignupError({loading: false, error: false, val: ''});
           props.dispatch(setJWTToken(form.email, form.password)).then(() => {
@@ -55,6 +55,7 @@ const SignupForm = props => {
           });
         })
         .catch(error => {
+          console.log('error: ', error);
           setSignupError({
             loading: false,
             error: true,

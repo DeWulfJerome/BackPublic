@@ -1,24 +1,22 @@
 import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-export const createAccount = async (email, password) => {
-  return axios.post(
-    'https://fluxwebdesign5.be/customer/back-up-plan/wp-json/back-up-plan/v1/register_user',
-    {
-      email: email,
-      password: password,
-    },
-  );
+const serverUrl =
+  'https://vps-d0e9b0ec-81b9-4b27-87c0-43cd35d5ef77.yourvps.io/customer/back-up-plan/?rest_route=';
+
+export const createAccount = async (email, password, name) => {
+  return axios.post(serverUrl + '/back-up-plan/v1/register_user', {
+    email: email,
+    password: password,
+    name: name,
+  });
 };
 
 export const getNewJWTToken = (email, password) => {
-  return axios.post(
-    'https://fluxwebdesign5.be/customer/back-up-plan/wp-json/jwt-auth/v1/token',
-    {
-      username: email,
-      password: password,
-    },
-  );
+  return axios.post(serverUrl + '/jwt-auth/v1/token', {
+    username: email,
+    password: password,
+  });
 };
 
 export const login = (email, password) => {};
@@ -54,9 +52,7 @@ export const setJWTToken = (email, password) => {
 export const validateJWTToken = async token => {
   if (null !== token) {
     return axios
-      .post(
-        'https://fluxwebdesign5.be/customer/back-up-plan/wp-json/jwt-auth/v1/token/validate',
-      )
+      .post(serverUrl + '/jwt-auth/v1/token/validate')
       .then(response => {
         return response.data.code;
       })
