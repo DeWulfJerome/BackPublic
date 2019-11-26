@@ -25,8 +25,6 @@ const Loading = props => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${userToken}`;
       const validatedToken = await validateJWTToken(userToken);
       if (validatedToken === 'jwt_auth_valid_token') {
-        // Hydrate store
-
         // Hide splash
         SplashScreen.hide();
         // Go to app

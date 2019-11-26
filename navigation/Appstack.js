@@ -2,6 +2,7 @@ import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {Text} from 'react-native';
 
 import StyleConstants from '../StyleConstants';
 import styles from '../styles';
@@ -17,6 +18,8 @@ import Loading from '../screens/auth/Loading';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
+
+import HeaderDots from '../components/buttons/HeaderDots';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -59,6 +62,15 @@ const FeedStack = createStackNavigator({
     screen: ListItemDetails,
     navigationOptions: ({navigation}) => ({
       title: `${navigation.state.params.title || 'details'}`,
+      headerRight: () => {
+        if (navigation.state.params.from !== 'AllActivityList') {
+          return (
+            <HeaderDots
+              navProps={navigation}
+              id={navigation.state.params.id}></HeaderDots>
+          );
+        }
+      },
       headerStyle: [
         {
           backgroundColor: StyleConstants.colors.blue.light,
