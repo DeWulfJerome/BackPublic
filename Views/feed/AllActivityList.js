@@ -1,49 +1,59 @@
-import React from 'react';
-import {ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {FlatList} from 'react-native';
+import {useSelector} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
+
+import {getInactiveAdviezen} from '../../controllers/feed/feedActions';
 
 import ListItem from '../../components/Lists/ListItem';
 import AllActivityContent from './AllActivityContent';
 
 const AllActivityList = props => {
-  const feed = [
-    {title: 'Bekken bridge topexpert', sub: '10 min'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-  ];
+  const [feed, setFeed] = useState([]);
+  const allAdviezen = useSelector(store => store.feedReducer.adviezen);
 
-  const renderListItems = () => {
-    return feed.map((val, index) => {
-      return (
-        <ListItem
-          key={index}
-          onPress={() => {
-            props.navProps.navigate('ListItemDetail', {
-              title: val.title,
-              image: 'weight',
-              from: 'AllActivityList',
-            });
-          }}
-          uri={require('../../assets/Glasses/weightLift.png')}
-          content={
-            <AllActivityContent title={val.title} sub={val.sub} />
-          }></ListItem>
-      );
-    });
+  useEffect(() => {
+    if (allAdviezen.length !== 0) {
+      getAdvices();
+    }
+  }, [allAdviezen]);
+
+  const getAdvices = () => {
+    let inactiveAdviezen = getInactiveAdviezen(allAdviezen);
+    setFeed(inactiveAdviezen);
+  };
+
+  const renderListItems = ({item}) => {
+    return (
+      <ListItem
+        key={item.title}
+        onPress={() => {
+          props.navProps.navigate('ListItemDetail', {
+            title: item.title,
+            image: 'weight',
+            from: 'AllActivityList',
+            advies: item.advies,
+            id: item.id,
+          });
+        }}
+        uri={require('../../assets/Glasses/weightLift.png')}
+        content={
+          <AllActivityContent
+            navProps={props.navProps}
+            id={item.id}
+            title={item.title}
+            sub={item.sub}
+          />
+        }></ListItem>
+    );
   };
   return (
-    <ScrollView
-      contentContainerStyle={{
-        paddingBottom: StyleConstants.padding.navAvoider,
-      }}>
-      {renderListItems()}
-    </ScrollView>
+    <FlatList
+      style={{height: '100%', paddingBottom: StyleConstants.padding.navAvoider}}
+      data={feed}
+      renderItem={renderListItems}
+      keyExtractor={item => item.title}></FlatList>
   );
 };
 

@@ -1,9 +1,6 @@
 import {AsyncStorage} from 'react-native';
 import axios from 'axios';
 
-const serverUrl =
-  'https://vps-d0e9b0ec-81b9-4b27-87c0-43cd35d5ef77.yourvps.io/customer/back-up-plan/?rest_route=';
-
 export const createAccount = async (email, password, name) => {
   return axios.post(serverUrl + '/back-up-plan/v1/register_user', {
     email: email,

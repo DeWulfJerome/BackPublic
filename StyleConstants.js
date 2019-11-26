@@ -1,5 +1,6 @@
 import {Dimensions} from 'react-native';
 const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 const StyleConstants = {
   colors: {
@@ -55,6 +56,9 @@ const StyleConstants = {
   containerWidth: {
     full: deviceWidth,
     padded: deviceWidth - 40,
+  },
+  containerHeight: {
+    full: deviceHeight,
   },
   font: {
     sizes: {

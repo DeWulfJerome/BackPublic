@@ -1,18 +1,42 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Image, Text, StyleSheet, ScrollView} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
 import styles from '../../styles';
 
+import {setAdviesActivity} from '../../controllers/feed/feedActions';
+
 import Button from '../../components/buttons/Button';
 
 const ListItemDetails = props => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
   const didActivity = () => {
-    console.log('did this ac');
+    console.log('did this ac:', props.navigation.state.params.id);
   };
 
   const activateActivity = () => {
-    console.log('activate this ac');
+    setLoading(true);
+    setAdviesActivity(props.navigation.state.params.id, true, dispatch)
+      .then(response => {
+        setLoading(false);
+        props.navigation.navigate('Feed');
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    //getImage();
+  });
+
+  const getImage = () => {
+    // If there is a specific image => get it from wordpress
+    console.log(props.navigation.state.params);
   };
 
   const screenProps = props.navigation.state.params;
@@ -36,21 +60,14 @@ const ListItemDetails = props => {
           ]}>
           Beschrijving
         </Text>
-        <Text style={styles.normalText}>
-          In ruglig. Strek je benen en steun met je hielen op een stoel of
-          zitbal. Kantel je bekken, trek je navel naar je rug toe en knijp je je
-          billen samen. Hou de spanning in je buik- en bilspieren vast zodat je
-          rug een rechte plank blijft. Strek traag één been naar boven. Hou de
-          spanning in je buik- en bilspieren vast zodat je rug een rechte plank
-          blijft. Je schouders en hals blijven ontspannen. Blijf rustig
-          ademhalen. Tel traag tot 10. Herhaal 3 maal.
-        </Text>
+        <Text style={styles.normalText}>{screenProps.advies}</Text>
       </View>
       <View style={detailStyle.textContainer}>
         {screenProps.from === 'AllActivityList' ? (
           <Button
             filled={true}
             text={'Toevoegen'}
+            loading={loading}
             onPress={activateActivity}></Button>
         ) : (
           <Button

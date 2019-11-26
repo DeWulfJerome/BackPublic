@@ -12,6 +12,10 @@ const Copy = {
       hasNoAccount: 'Nog geen account? Maak er een aan.',
       hasAccount: 'Al een account? Meld je aan.',
     },
+    feed: {
+      remove: 'Verwijderen uit feed',
+      setQ: 'Herinnering instellen',
+    },
   },
 };
 

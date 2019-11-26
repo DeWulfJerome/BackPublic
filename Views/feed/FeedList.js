@@ -1,47 +1,59 @@
-import React from 'react';
-import {ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {FlatList} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
+
+import {getActiveAdviezen} from '../../controllers/feed/feedActions';
 
 import ListItem from '../../components/Lists/ListItem';
 import FeedContent from './FeedContent';
 
 const FeedList = props => {
-  const feed = [
-    {title: 'Bekken bridge topexpert', sub: '10 min'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-    {title: '10 000 stappen', sub: 'Hele dag'},
-    {title: 'Buikspieren 1', sub: '5 min'},
-  ];
+  const [feed, setFeed] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const allAdviezen = useSelector(store => store.feedReducer.adviezen);
 
-  const renderListItems = () => {
-    return feed.map((val, index) => {
-      return (
-        <ListItem
-          key={index}
-          onPress={() => {
-            props.navProps.navigate('ListItemDetail', {
-              title: val.title,
-              image: 'weight',
-              from: 'FeedList',
-            });
-          }}
-          uri={require('../../assets/Glasses/weightLift.png')}
-          content={<FeedContent title={val.title} sub={val.sub} />}></ListItem>
-      );
-    });
+  useEffect(() => {
+    if (allAdviezen !== 0) {
+      getFeed();
+    }
+  }, [allAdviezen]);
+
+  const getFeed = () => {
+    let activeAdviezen = getActiveAdviezen(allAdviezen);
+    setFeed(activeAdviezen);
+  };
+
+  const renderListItems = ({item}) => {
+    return (
+      <ListItem
+        key={item.title}
+        onPress={() => {
+          props.navProps.navigate('ListItemDetail', {
+            title: item.title,
+            image: 'weight',
+            from: 'FeedList',
+            advies: item.advies,
+            id: item.id,
+          });
+        }}
+        uri={require('../../assets/Glasses/weightLift.png')}
+        content={<FeedContent title={item.title} sub={item.sub} />}></ListItem>
+    );
   };
   return (
-    <ScrollView
-      contentContainerStyle={{
-        paddingBottom: StyleConstants.padding.navAvoider,
-      }}>
-      {renderListItems()}
-    </ScrollView>
+    <FlatList
+      style={{height: '100%', paddingBottom: StyleConstants.padding.navAvoider}}
+      data={feed}
+      refreshing={refreshing}
+      onRefresh={() => {
+        setRefreshing(true);
+        console.log('qsdf');
+        setRefreshing(false);
+      }}
+      renderItem={renderListItems}
+      keyExtractor={item => item.title}></FlatList>
   );
 };
 
