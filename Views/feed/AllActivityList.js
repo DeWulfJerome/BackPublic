@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import StyleConstants from '../../StyleConstants';
 
 import {getInactiveAdviezen} from '../../controllers/feed/feedActions';
+import {getIllustration} from '../../assets/Glasses/getIllustration';
 
 import ListItem from '../../components/Lists/ListItem';
 import AllActivityContent from './AllActivityContent';
@@ -37,7 +38,7 @@ const AllActivityList = props => {
             id: item.id,
           });
         }}
-        uri={require('../../assets/Glasses/weightLift.png')}
+        uri={getIllustration(item.category)}
         content={
           <AllActivityContent
             navProps={props.navProps}

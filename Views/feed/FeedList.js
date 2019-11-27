@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
 
 import {getActiveAdviezen} from '../../controllers/feed/feedActions';
+import {getIllustration} from '../../assets/Glasses/getIllustration';
 
 import ListItem from '../../components/Lists/ListItem';
 import FeedContent from './FeedContent';
@@ -29,6 +30,7 @@ const FeedList = props => {
     return (
       <ListItem
         key={item.title}
+        done={item.doneToday}
         onPress={() => {
           props.navProps.navigate('ListItemDetail', {
             title: item.title,
@@ -38,7 +40,7 @@ const FeedList = props => {
             id: item.id,
           });
         }}
-        uri={require('../../assets/Glasses/weightLift.png')}
+        uri={getIllustration(item.category)}
         content={<FeedContent title={item.title} sub={item.sub} />}></ListItem>
     );
   };

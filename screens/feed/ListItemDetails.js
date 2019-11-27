@@ -5,7 +5,10 @@ import {useDispatch} from 'react-redux';
 import StyleConstants from '../../StyleConstants';
 import styles from '../../styles';
 
-import {setAdviesActivity} from '../../controllers/feed/feedActions';
+import {
+  setAdviesActivity,
+  setAdviesDoneToday,
+} from '../../controllers/feed/feedActions';
 
 import Button from '../../components/buttons/Button';
 
@@ -14,7 +17,17 @@ const ListItemDetails = props => {
   const [loading, setLoading] = useState(false);
 
   const didActivity = () => {
-    console.log('did this ac:', props.navigation.state.params.id);
+    setLoading(true);
+    setAdviesDoneToday(props.navigation.state.params.id, true, dispatch)
+      .then(response => {
+        setLoading(false);
+        props.navigation.navigate('Feed');
+      })
+      .catch(err => {
+        alert('Something went wrong, try again later');
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   const activateActivity = () => {
@@ -25,6 +38,7 @@ const ListItemDetails = props => {
         props.navigation.navigate('Feed');
       })
       .catch(err => {
+        alert('Something went wrong, try again later');
         console.log(err);
         setLoading(false);
       });

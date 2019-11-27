@@ -9,7 +9,8 @@ import ListContent from './ListContent';
 const ListItem = props => {
   return (
     <TouchableOpacity
-      style={itemStyle.wrapperStyle}
+      style={[itemStyle.wrapperStyle, props.done ? itemStyle.done : null]}
+      disabled={props.done}
       onPress={() => {
         props.onPress();
       }}>
@@ -36,6 +37,9 @@ const itemStyle = StyleSheet.create({
     right: 0,
     left: '33%',
     borderRadius: StyleConstants.border.radius.large,
+  },
+  done: {
+    backgroundColor: '#fafafa',
   },
 });
 

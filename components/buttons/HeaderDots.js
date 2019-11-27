@@ -25,7 +25,6 @@ const HeaderDots = props => {
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log(props);
           setShowModal(true);
         }}
         style={headerDotStyle.containerStyle}>
@@ -103,7 +102,7 @@ const headerDotStyle = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    backgroundColor: StyleConstants.colors.blue.light,
+    backgroundColor: StyleConstants.colors.white,
     padding: StyleConstants.padding.small,
   },
   modalBtn: {
