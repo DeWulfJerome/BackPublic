@@ -2,7 +2,6 @@ import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {Text} from 'react-native';
 
 import StyleConstants from '../StyleConstants';
 import styles from '../styles';
@@ -12,6 +11,8 @@ import TabBarIcon from './TabBarIcon';
 import Feed from '../screens/main/Feed';
 import Profile from '../screens/main/Profile';
 import Badges from '../screens/main/Badges';
+import Questions from '../screens/main/Questions';
+import Stop from '../screens/main/Stop';
 import Login from '../screens/auth/Login';
 import SignUp from '../screens/auth/SignUp';
 import Loading from '../screens/auth/Loading';
@@ -38,12 +39,31 @@ const AuthStack = createStackNavigator({
   },
 });
 
+const QuestionsStack = createStackNavigator({
+  Questions: {
+    screen: Questions,
+    navigationOptions: ({navigation}) => ({
+      title: 'Questions',
+      header: null,
+    }),
+  },
+});
+
+const StopStack = createStackNavigator({
+  Stop: {
+    screen: Stop,
+    navigationOptions: ({navigation}) => ({
+      title: 'Stop',
+      header: null,
+    }),
+  },
+});
+
 const FeedStack = createStackNavigator({
   Feed: {
     screen: Feed,
     navigationOptions: () => ({
       title: 'Feed',
-
       headerStyle: [
         {
           backgroundColor: StyleConstants.colors.blue.light,
@@ -61,7 +81,7 @@ const FeedStack = createStackNavigator({
   ListItemDetail: {
     screen: ListItemDetails,
     navigationOptions: ({navigation}) => ({
-      title: `${navigation.state.params.title || 'details'}`,
+      title: `${navigation.state.params.title || 'Details'}`,
       headerRight: () => {
         if (navigation.state.params.from !== 'AllActivityList') {
           return (
@@ -134,6 +154,8 @@ const AppContainer = createAppContainer(
       AuthLoading: Loading,
       Auth: AuthStack,
       App: MainStack,
+      QuestionSwitch: QuestionsStack,
+      StopScreen: StopStack,
     },
     {
       initialRouteName: 'AuthLoading',

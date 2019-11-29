@@ -1,19 +1,17 @@
 import React from 'react';
-import Questionnaire from '../components/questionnaire/Questionnaire';
-import styles from '../styles';
+import Questionnaire from '../../components/questionnaire/Questionnaire';
+import styles from '../../styles';
 
-import Questions from '../tempAssets/questions.json';
-
-const QuestionnaireTemp = props => {
+const QuestionnaireWithOptions = props => {
   return (
     <Questionnaire
-      questions={Questions}
+      questions={props.questions}
       showPrefix={true}
       showNavigation={false}
-      onFinish={result => {
-        console.log(result);
-      }}
+      onFinish={props.onFinish}
       progressPadding={30}
+      blockNavigation={props.blockNavigation}
+      onAnswer={props.onAnswer}
       renderNextCards={true}
       animationInterval={150}
       nextCardsColor={'#fff'}
@@ -28,4 +26,4 @@ const QuestionnaireTemp = props => {
   );
 };
 
-export default QuestionnaireTemp;
+export default QuestionnaireWithOptions;

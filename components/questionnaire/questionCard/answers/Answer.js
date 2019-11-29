@@ -23,7 +23,11 @@ const Answer = props => {
   });
 
   return (
-    <Animated.View style={{transform: [{translateX: props.slideAnim}]}}>
+    <Animated.View
+      style={[
+        {transform: [{translateX: props.slideAnim}]},
+        props.blockNavigation && {opacity: 0.3},
+      ]}>
       <TouchableOpacity
         style={
           [
@@ -34,6 +38,7 @@ const Answer = props => {
             selected ? answerStyle.selected : null,
           ]
         }
+        disabled={props.blockNavigation}
         onPress={() => {
           selectThis();
           //setSelected(!selected);

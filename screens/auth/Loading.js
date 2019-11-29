@@ -28,18 +28,17 @@ const Loading = props => {
       if (validatedToken === 'jwt_auth_valid_token') {
         // Is this a new day?
         let resetTime = await resetAdviezen();
+
         if (resetTime.data) {
           // Lists have been reset in database
-          // Ask some questions and give some tips
-
           // Hide splash
           SplashScreen.hide();
-          // Go to app
           // This should go to the questionnaire or tip screens
-          props.navigation.navigate('App');
+          props.navigation.navigate('Questions', {
+            numbQuestions: resetTime.data,
+          });
           return;
         }
-
         // Hide splash
         SplashScreen.hide();
         // Go to app
