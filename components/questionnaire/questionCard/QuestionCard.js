@@ -43,6 +43,7 @@ const QuestionCard = props => {
           props.answerScrollViewStyle || questionCardStyle.answerContainer
         }>
         <Answers
+          blockNavigation={props.blockNavigation}
           slideAnim={props.slideAnim}
           answerWrapperStyle={props.answerWrapperStyle}
           selectedAnswerWrapperStyle={props.selectedAnswerWrapperStyle}

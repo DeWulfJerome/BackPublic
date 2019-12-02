@@ -5,7 +5,7 @@ import AllActivityList from '../../Views/feed/AllActivityList';
 
 const AllActivities = props => {
   return (
-    <View>
+    <View style={{flex: 1}}>
       <AllActivityList navProps={props.navigation} />
     </View>
   );

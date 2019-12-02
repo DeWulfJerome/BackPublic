@@ -1,6 +1,6 @@
 [
   {
-    "question": "Is de pijn constant aanwezig? Is er geen enkele houding die de pijn doet verminderen?",
+    "question": "Ben je reeds bij een chiropractor of arts geweest om een pathologische oorzaak uit te sluiten?",
     "answers": ["Ja", "Nee"],
     "id": 1
   },
@@ -23,20 +23,5 @@
     "question": "Is de pijn constant aanwezig? Is er geen enkele houding die de pijn doet verminderen?",
     "answers": ["Ja", "Nee"],
     "id": 5
-  },
-  {
-    "question": "Heb je een gevoelloze zone rond je achterwerk en/of de binnenkant van je dijen?",
-    "answers": ["Ja", "Nee"],
-    "id": 6
-  },
-  {
-    "question": "Is er verandering in je menstruatiepatroon? Heb je tussentijdse bloedingen?",
-    "answers": ["Ja", "Nee"],
-    "id": 7
-  },
-  {
-    "question": "Kan je maar een kort eind wandelen en moet je dan stoppen omwille van té felle rugpijn of pijn in je been?",
-    "answers": ["Ja", "Nee"],
-    "id": 8
   }
 ]

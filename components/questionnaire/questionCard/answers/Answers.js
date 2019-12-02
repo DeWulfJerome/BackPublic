@@ -17,6 +17,7 @@ const Answers = props => {
         <Answer
           slideAnim={props.slideAnim}
           selectedAnswer={selectedAnswer}
+          blockNavigation={props.blockNavigation}
           answerWrapperStyle={props.answerWrapperStyle}
           answerTextStyle={props.answerTextStyle}
           selectedAnswerWrapperStyle={props.selectedAnswerWrapperStyle}

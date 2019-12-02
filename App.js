@@ -2,8 +2,10 @@ import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
+import {StatusBar} from 'react-native';
 
 import reducers from './Model/rootReducer';
+import StyleConstants from './StyleConstants';
 
 //fix font bug
 import TextWrapper from './utils/TextWrapper';
@@ -22,6 +24,10 @@ const App = () => {
 
   return (
     <Provider store={store}>
+      <StatusBar
+        backgroundColor={StyleConstants.colors.blue.light}
+        barStyle="dark-content"
+      />
       <AppContainer></AppContainer>
     </Provider>
   );

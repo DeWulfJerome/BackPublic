@@ -64,7 +64,7 @@ const Questionnaire = props => {
     }
 
     if (newAnswerArray.length < questionsAndAnswers.length) {
-      //push a new answer (currentAnswer) to the answer array
+      // Push a new answer (currentAnswer) to the answer array
       newAnswerArray.push(updatedAnswer);
       setAnswerArray(newAnswerArray);
     } else {
@@ -72,7 +72,12 @@ const Questionnaire = props => {
       newAnswerArray.push(updatedAnswer);
       setAnswerArray(newAnswerArray);
     }
-    //show the next question or finished questionnaire?
+    // Fire the onAnswer prop with the given answer and the index of the answered question
+    // props.questions[questionIndex].answers[updatedAnswer] = written answer given
+    if (props.onAnswer) {
+      props.onAnswer(updatedAnswer, questionIndex);
+    }
+    // Show the next question or finished questionnaire?
     if (newAnswerArray.length < questionsAndAnswers.length) {
       setQuestionIndex(questionIndex + 1);
       cb();
@@ -170,6 +175,7 @@ const Questionnaire = props => {
         setCurrentAnswerFunc={index => {
           setCurrentAnswerFunc(index);
         }}
+        blockNavigation={props.blockNavigation}
         navNext={navNext}
         currentQuestion={questionsAndAnswers[questionIndex].question}
         currentAnswers={questionsAndAnswers[questionIndex].answers}
@@ -188,7 +194,7 @@ const Questionnaire = props => {
         questionTextStyle={props.questionTextStyle}
         dotStyle={props.dotStyle}></QuestionCard>
       <Nav
-        showNavigation={props.showNavigation}
+        showNavigation={props.showNavigation && props.blockNavigation === false}
         navBack={navBack}
         backBtn={props.backBtnText}
         nextBtn={props.nextBtnText}

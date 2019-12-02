@@ -9,6 +9,8 @@ import {getAllAdviezen, setAdviezen} from '../../controllers/feed/feedActions';
 import FAB from '../../components/buttons/FAB';
 import FeedList from '../../Views/feed/FeedList';
 
+import QuestionnaireTemp from '../QuestionnaireTemp';
+
 class Feed extends React.Component {
   componentDidMount = () => {
     getAllAdviezen()
@@ -24,7 +26,10 @@ class Feed extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View
+        style={{
+          flex: 1 /* backgroundColor: StyleConstants.colors.blue.dark */,
+        }}>
         <FeedList navProps={this.props.navigation}></FeedList>
         <View
           style={{
@@ -38,6 +43,7 @@ class Feed extends React.Component {
               this.props.navigation.navigate('AllActivities');
             }}></FAB>
         </View>
+        {/* <QuestionnaireTemp></QuestionnaireTemp> */}
       </View>
     );
   }
