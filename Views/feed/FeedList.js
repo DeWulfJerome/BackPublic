@@ -46,7 +46,8 @@ const FeedList = props => {
   };
   return (
     <FlatList
-      style={{height: '100%', paddingBottom: StyleConstants.padding.navAvoider}}
+      contentContainerStyle={{paddingBottom: StyleConstants.padding.navAvoider}}
+      style={{flex: 1}}
       data={feed}
       refreshing={refreshing}
       onRefresh={() => {

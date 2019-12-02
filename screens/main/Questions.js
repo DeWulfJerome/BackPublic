@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
 import StyleConstants from '../../StyleConstants';
 
@@ -8,6 +9,7 @@ import {
   generateFakeQuestions,
   substituteFakeForRealQuestion,
   processAnswer,
+  stopUser,
 } from '../../controllers/questions/questionActions';
 
 import QuestionnaireWithOptions from '../../Views/questions/QuestionnaireWithOptions';
@@ -62,14 +64,14 @@ const Questions = props => {
     // Determine whether to show the yes or no follow up question
     let alteredQuestions = '';
     let nextQuestion = nextNo;
+    // Copy currentQuestion so that it is not possible to send the wrong question to the backend
+    let questionAnswered = JSON.parse(JSON.stringify(currentQuestion));
 
     if (answer === 0) {
       nextQuestion = nextYes;
     }
-    if (nextQuestion.question === 'STOP') {
-      // Send to refund screen
-      props.navigation.navigate('StopScreen');
-    }
+    // Check if user needs to be stopped
+    stopUser(nextQuestion, props.navigation);
     // Show the correct next question
     alteredQuestions = substituteFakeForRealQuestion(
       questions,
@@ -78,7 +80,11 @@ const Questions = props => {
     );
     setQuestions(alteredQuestions);
     // Do advies logic on backend
-    let processedAnswer = await processAnswer(nextQuestion);
+    let processedAnswer = await processAnswer(
+      nextQuestion,
+      questionAnswered,
+      answer,
+    );
     // Get next questions
     getQuestions();
   };

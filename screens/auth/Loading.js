@@ -7,6 +7,10 @@ import StyleConstants from '../../StyleConstants';
 
 import {validateJWTToken} from '../../controllers/auth/auth';
 import {resetAdviezen} from '../../controllers/feed/feedActions';
+import {
+  stopUser,
+  getNextQuestions,
+} from '../../controllers/questions/questionActions';
 
 const Loading = props => {
   useEffect(() => {
@@ -28,20 +32,25 @@ const Loading = props => {
       if (validatedToken === 'jwt_auth_valid_token') {
         // Is this a new day?
         let resetTime = await resetAdviezen();
+        let questions = await getNextQuestions();
 
+        if (questions.data.currentQuestion.question === 'STOP') {
+          SplashScreen.hide();
+          // Send to refund screen
+          props.navigation.navigate('StopScreen');
+          return;
+        }
         if (resetTime.data) {
           // Lists have been reset in database
-          // Hide splash
-          SplashScreen.hide();
           // This should go to the questionnaire or tip screens
+          SplashScreen.hide();
           props.navigation.navigate('Questions', {
             numbQuestions: resetTime.data,
           });
           return;
         }
-        // Hide splash
-        SplashScreen.hide();
         // Go to app
+        SplashScreen.hide();
         props.navigation.navigate('App');
         return;
       } else {
@@ -59,9 +68,8 @@ const Loading = props => {
    * @returns void
    */
   const reAuth = () => {
-    // Hide splash
-    SplashScreen.hide();
     // Go to login
+    SplashScreen.hide();
     props.navigation.navigate('Auth');
   };
 

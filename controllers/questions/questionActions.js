@@ -36,15 +36,32 @@ export const substituteFakeForRealQuestion = (
   return alteredQuestions;
 };
 
-export const processAnswer = lastQuestion => {
+export const processAnswer = (lastQuestion, question, answer) => {
   return new Promise((resolve, reject) => {
+    answer = question.answers[answer];
+    question = question.question;
     let setLastQuestion = setLastAnsweredQuestion(lastQuestion);
-    Promise.all([setLastQuestion])
+    let answeredQuestion = answerQuestionMongo(question, answer);
+    Promise.all([setLastQuestion, answeredQuestion])
       .then(result => {
-        resolve(result[0]);
+        resolve(result);
       })
       .catch(err => {
         reject(err);
       });
   });
+};
+
+const answerQuestionMongo = (question, answer) => {
+  return axios.post(serverUrl + '/back-up-plan/v1/question_answered', {
+    questionAnswered: question,
+    answer: answer,
+  });
+};
+
+export const stopUser = (question, navigation) => {
+  if (question.question === 'STOP') {
+    // Send to refund screen
+    navigation.navigate('StopScreen');
+  }
 };
