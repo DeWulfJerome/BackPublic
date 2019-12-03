@@ -9,6 +9,7 @@ import {getIllustration} from '../../assets/Glasses/getIllustration';
 
 import ListItem from '../../components/Lists/ListItem';
 import AllActivityContent from './AllActivityContent';
+import NoInactiveAdvices from './NoInactiveAdvices';
 
 const AllActivityList = props => {
   const [feed, setFeed] = useState([]);
@@ -49,11 +50,16 @@ const AllActivityList = props => {
         }></ListItem>
     );
   };
+  const renderNoInActive = () => {
+    return <NoInactiveAdvices navProps={props.navProps}></NoInactiveAdvices>;
+  };
+
   return (
     <FlatList
       contentContainerStyle={{paddingBottom: StyleConstants.padding.navAvoider}}
       style={{flex: 1}}
       data={feed}
+      ListEmptyComponent={renderNoInActive}
       renderItem={renderListItems}
       keyExtractor={item => item.title}></FlatList>
   );

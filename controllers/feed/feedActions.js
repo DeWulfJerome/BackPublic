@@ -168,3 +168,9 @@ export const setAdviesDoneToday = (adviesId, bool, dispatch) => {
 export const resetAdviezen = () => {
   return axios.get(serverUrl + '/back-up-plan/v1/check_day_passed');
 };
+
+export const getAdditionalQuestionsAmount = () => {
+  return axios.get(
+    serverUrl + '/back-up-plan/v1/get_additional_questions_amount',
+  );
+};
