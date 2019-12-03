@@ -27,10 +27,10 @@ const HeaderDots = props => {
   const renderModal = () => {
     return (
       <TouchableOpacity
+        style={headerDotStyle.modalContainer}
         onPress={() => {
           setShowModal(false);
-        }}
-        style={headerDotStyle.modalContainer}>
+        }}>
         <View
           style={[
             headerDotStyle.modalInnerContainer,
@@ -73,6 +73,7 @@ const headerDotStyle = StyleSheet.create({
     height: StyleConstants.containerHeight.full,
     width: StyleConstants.containerWidth.full,
   },
+
   modalInnerContainer: {
     position: 'absolute',
     top: 0,

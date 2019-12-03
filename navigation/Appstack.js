@@ -1,9 +1,11 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import StyleConstants from '../StyleConstants';
+import Copy from '../assets/Copy';
 import styles from '../styles';
 
 import TabBar from './TabBar';
@@ -24,6 +26,9 @@ import AllActivities from '../screens/feed/AllActivities';
 import HeaderDots from '../components/buttons/HeaderDots';
 import ListItemDetailDotsContent from '../Views/header/ListItemDetailDotsContent';
 import ProfileDotsContent from '../Views/header/ProfileDotsContent';
+
+import AndroidListItemDetailDots from '../Views/header/AndroidListItemDetailDots';
+import AndroidProfileDots from '../Views/header/AndroidProfileDots';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -68,11 +73,22 @@ const ProfileStack = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: 'Profiel',
       headerRight: () => {
-        return (
-          <HeaderDots>
-            <ProfileDotsContent navProps={navigation}></ProfileDotsContent>
-          </HeaderDots>
-        );
+        if (Platform.OS === 'ios') {
+          return (
+            <HeaderDots>
+              <ProfileDotsContent navProps={navigation}></ProfileDotsContent>
+            </HeaderDots>
+          );
+        } else {
+          return (
+            <AndroidProfileDots
+              navProps={navigation}
+              labels={[
+                Copy.NL.profile.settings,
+                Copy.NL.profile.logout,
+              ]}></AndroidProfileDots>
+          );
+        }
       },
       headerStyle: [
         {
@@ -133,17 +149,30 @@ const FeedStack = createStackNavigator({
       title: `${navigation.state.params.title || 'Details'}`,
       headerRight: () => {
         if (navigation.state.params.from !== 'AllActivityList') {
-          return (
-            <HeaderDots>
-              <ListItemDetailDotsContent
+          if (Platform.OS === 'ios') {
+            return (
+              <HeaderDots>
+                <ListItemDetailDotsContent
+                  navProps={navigation}
+                  id={navigation.state.params.id}></ListItemDetailDotsContent>
+              </HeaderDots>
+            );
+          } else {
+            return (
+              <AndroidListItemDetailDots
+                id={navigation.state.params.id}
                 navProps={navigation}
-                id={navigation.state.params.id}></ListItemDetailDotsContent>
-            </HeaderDots>
-          );
+                labels={[
+                  Copy.NL.feed.setQ,
+                  Copy.NL.feed.remove,
+                ]}></AndroidListItemDetailDots>
+            );
+          }
         }
       },
       headerStyle: [
         {
+          overflow: 'visible',
           backgroundColor: StyleConstants.colors.blue.light,
           height: 60,
           borderBottomWidth: 0,
