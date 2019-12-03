@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
@@ -9,6 +9,7 @@ import {getIllustration} from '../../assets/Glasses/getIllustration';
 
 import ListItem from '../../components/Lists/ListItem';
 import FeedContent from './FeedContent';
+import NoActiveAdvices from './NoActiveAdvices';
 
 const FeedList = props => {
   const [feed, setFeed] = useState([]);
@@ -44,12 +45,14 @@ const FeedList = props => {
         content={<FeedContent title={item.title} sub={item.sub} />}></ListItem>
     );
   };
+
   return (
     <FlatList
       contentContainerStyle={{paddingBottom: StyleConstants.padding.navAvoider}}
       style={{flex: 1}}
       data={feed}
       refreshing={refreshing}
+      ListEmptyComponent={NoActiveAdvices}
       onRefresh={() => {
         setRefreshing(true);
         console.log('qsdf');

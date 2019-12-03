@@ -1,9 +1,11 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 import StyleConstants from '../StyleConstants';
+import Copy from '../assets/Copy';
 import styles from '../styles';
 
 import TabBar from './TabBar';
@@ -16,11 +18,17 @@ import Stop from '../screens/main/Stop';
 import Login from '../screens/auth/Login';
 import SignUp from '../screens/auth/SignUp';
 import Loading from '../screens/auth/Loading';
+import Settings from '../screens/profile/Settings';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
 
 import HeaderDots from '../components/buttons/HeaderDots';
+import ListItemDetailDotsContent from '../Views/header/ListItemDetailDotsContent';
+import ProfileDotsContent from '../Views/header/ProfileDotsContent';
+
+import AndroidListItemDetailDots from '../Views/header/AndroidListItemDetailDots';
+import AndroidProfileDots from '../Views/header/AndroidProfileDots';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -59,6 +67,63 @@ const StopStack = createStackNavigator({
   },
 });
 
+const ProfileStack = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: ({navigation}) => ({
+      title: 'Profiel',
+      headerRight: () => {
+        if (Platform.OS === 'ios') {
+          return (
+            <HeaderDots>
+              <ProfileDotsContent navProps={navigation}></ProfileDotsContent>
+            </HeaderDots>
+          );
+        } else {
+          return (
+            <AndroidProfileDots
+              navProps={navigation}
+              labels={[
+                Copy.NL.profile.settings,
+                Copy.NL.profile.logout,
+              ]}></AndroidProfileDots>
+          );
+        }
+      },
+      headerStyle: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: ({navigation}) => ({
+      title: 'Instellingen',
+      headerStyle: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+});
+
 const FeedStack = createStackNavigator({
   Feed: {
     screen: Feed,
@@ -84,15 +149,30 @@ const FeedStack = createStackNavigator({
       title: `${navigation.state.params.title || 'Details'}`,
       headerRight: () => {
         if (navigation.state.params.from !== 'AllActivityList') {
-          return (
-            <HeaderDots
-              navProps={navigation}
-              id={navigation.state.params.id}></HeaderDots>
-          );
+          if (Platform.OS === 'ios') {
+            return (
+              <HeaderDots>
+                <ListItemDetailDotsContent
+                  navProps={navigation}
+                  id={navigation.state.params.id}></ListItemDetailDotsContent>
+              </HeaderDots>
+            );
+          } else {
+            return (
+              <AndroidListItemDetailDots
+                id={navigation.state.params.id}
+                navProps={navigation}
+                labels={[
+                  Copy.NL.feed.setQ,
+                  Copy.NL.feed.remove,
+                ]}></AndroidListItemDetailDots>
+            );
+          }
         }
       },
       headerStyle: [
         {
+          overflow: 'visible',
           backgroundColor: StyleConstants.colors.blue.light,
           height: 60,
           borderBottomWidth: 0,
@@ -129,7 +209,7 @@ const MainStack = createBottomTabNavigator(
   {
     Badges: Badges,
     Feed: FeedStack,
-    Profiel: Profile,
+    Profiel: ProfileStack,
   },
   {
     initialRouteName: 'Feed',

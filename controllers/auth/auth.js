@@ -58,3 +58,7 @@ export const validateJWTToken = async token => {
       });
   }
 };
+
+export const unsetJWTToken = async () => {
+  return AsyncStorage.removeItem('auth');
+};
