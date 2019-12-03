@@ -9,17 +9,6 @@ import {setAdviesActivity} from '../../controllers/feed/feedActions';
 
 const HeaderDots = props => {
   const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
-
-  const deactivateActivity = () => {
-    setAdviesActivity(props.id, false, dispatch)
-      .then(response => {
-        props.navProps.navigate('Feed');
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   const renderDots = () => {
     return (
@@ -47,21 +36,7 @@ const HeaderDots = props => {
             headerDotStyle.modalInnerContainer,
             StyleConstants.shadow.top,
           ]}>
-          <TouchableOpacity
-            style={headerDotStyle.modalBtn}
-            onPress={() => {
-              alert('pressed');
-            }}>
-            <Text style={headerDotStyle.textStyle}>{Copy.NL.feed.setQ}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={deactivateActivity}
-            style={[
-              headerDotStyle.modalBtn,
-              {marginTop: -StyleConstants.margins.small},
-            ]}>
-            <Text style={headerDotStyle.textStyle}>{Copy.NL.feed.remove}</Text>
-          </TouchableOpacity>
+          {props.children}
         </View>
       </TouchableOpacity>
     );
@@ -104,12 +79,6 @@ const headerDotStyle = StyleSheet.create({
     right: 0,
     backgroundColor: StyleConstants.colors.white,
     padding: StyleConstants.padding.small,
-  },
-  modalBtn: {
-    padding: StyleConstants.padding.medium,
-  },
-  textStyle: {
-    fontSize: StyleConstants.font.sizes.normal,
   },
 });
 

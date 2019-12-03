@@ -16,6 +16,10 @@ const Copy = {
       remove: 'Verwijderen uit feed',
       setQ: 'Herinnering instellen',
     },
+    profile: {
+      logout: 'Uitloggen',
+      settings: 'Instellingen',
+    },
   },
 };
 
