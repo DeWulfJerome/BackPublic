@@ -10,6 +10,7 @@ import StyleConstants from '../../StyleConstants';
 import {connect} from 'react-redux';
 
 import {setAdviesActivity} from '../../controllers/feed/feedActions';
+import {scheduleNotification} from '../../controllers/feed/notificationLogic';
 
 const UIManager = NativeModules.UIManager;
 
@@ -21,7 +22,8 @@ class AndroidListItemDetailDots extends React.Component {
       () => {},
       (result, index) => {
         if (index === 0) {
-          alert('set cue');
+          console.log('qsdf');
+          scheduleNotification(Date.now() + 6 * 1000);
         }
         if (index === 1) {
           setAdviesActivity(this.props.id, false, this.props.dispatch)
