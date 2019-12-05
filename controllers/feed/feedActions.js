@@ -7,7 +7,7 @@ export const getAllAdviezen = () => {
 export const getActiveAdviezen = allAdviezen => {
   return allAdviezen
     .filter(advies => {
-      return advies.active;
+      return advies.active && advies.class !== 'tip';
     })
     .sort((a, b) => {
       if (a.doneToday) {
@@ -20,7 +20,7 @@ export const getActiveAdviezen = allAdviezen => {
 
 export const getInactiveAdviezen = allAdviezen => {
   return allAdviezen.filter(advies => {
-    return !advies.active;
+    return !advies.active && advies.class !== 'tip';
   });
 };
 

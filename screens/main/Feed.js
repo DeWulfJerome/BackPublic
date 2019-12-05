@@ -9,8 +9,6 @@ import {getAllAdviezen, setAdviezen} from '../../controllers/feed/feedActions';
 import FAB from '../../components/buttons/FAB';
 import FeedList from '../../Views/feed/FeedList';
 
-import QuestionnaireTemp from '../QuestionnaireTemp';
-
 class Feed extends React.Component {
   componentDidMount = () => {
     getAllAdviezen()
@@ -34,7 +32,7 @@ class Feed extends React.Component {
         <View
           style={{
             position: 'absolute',
-            bottom: 120,
+            bottom: 100,
             right: StyleConstants.margins.medium,
             zIndex: 9999999,
           }}>
@@ -43,7 +41,6 @@ class Feed extends React.Component {
               this.props.navigation.navigate('AllActivities');
             }}></FAB>
         </View>
-        {/* <QuestionnaireTemp></QuestionnaireTemp> */}
       </View>
     );
   }

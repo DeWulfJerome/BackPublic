@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, View, Text} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import StyleConstants from '../../StyleConstants';
 

@@ -2,7 +2,10 @@ import React from 'react';
 import {Platform} from 'react-native';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator,
+} from 'react-navigation-tabs';
 
 import StyleConstants from '../StyleConstants';
 import Copy from '../assets/Copy';
@@ -19,6 +22,8 @@ import Login from '../screens/auth/Login';
 import SignUp from '../screens/auth/SignUp';
 import Loading from '../screens/auth/Loading';
 import Settings from '../screens/profile/Settings';
+import Cues from '../screens/profile/Cues';
+import Tips from '../screens/profile/Tips';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
@@ -67,9 +72,43 @@ const StopStack = createStackNavigator({
   },
 });
 
+const ProfileTabs = createMaterialTopTabNavigator(
+  {
+    Tips: {
+      screen: Tips,
+      navigationOptions: () => ({
+        title: 'Tips',
+      }),
+    },
+    Cues: {
+      screen: Cues,
+      navigationOptions: () => ({
+        title: 'Cues',
+      }),
+    },
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: StyleConstants.colors.black.fontBlack,
+      inactiveTintColor: StyleConstants.colors.black.subFontBlack,
+      pressColor: StyleConstants.colors.blue.medium,
+      indicatorStyle: {
+        backgroundColor: StyleConstants.colors.blue.dark,
+      },
+      style: [
+        {
+          backgroundColor: StyleConstants.colors.blue.light,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+    },
+  },
+);
+
 const ProfileStack = createStackNavigator({
   Profile: {
-    screen: Profile,
+    screen: ProfileTabs,
     navigationOptions: ({navigation}) => ({
       title: 'Profiel',
       headerRight: () => {
@@ -95,8 +134,8 @@ const ProfileStack = createStackNavigator({
           backgroundColor: StyleConstants.colors.blue.light,
           height: 60,
           borderBottomWidth: 0,
+          elevation: 0,
         },
-        StyleConstants.shadow.top,
       ],
       headerTitleStyle: [
         styles.title,
