@@ -14,7 +14,6 @@ import styles from '../styles';
 import TabBar from './TabBar';
 import TabBarIcon from './TabBarIcon';
 import Feed from '../screens/main/Feed';
-import Profile from '../screens/main/Profile';
 import Badges from '../screens/main/Badges';
 import Questions from '../screens/main/Questions';
 import Stop from '../screens/main/Stop';
@@ -27,6 +26,7 @@ import Tips from '../screens/profile/Tips';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
+import ScheduleReminder from '../screens/feed/ScheduleReminder';
 import TipItemDetail from '../screens/profile/TipItemDetail';
 
 import HeaderDots from '../components/buttons/HeaderDots';
@@ -217,6 +217,7 @@ const FeedStack = createStackNavigator({
               <HeaderDots>
                 <ListItemDetailDotsContent
                   navProps={navigation}
+                  adviesTitle={navigation.state.params.title}
                   id={navigation.state.params.id}></ListItemDetailDotsContent>
               </HeaderDots>
             );
@@ -224,6 +225,7 @@ const FeedStack = createStackNavigator({
             return (
               <AndroidListItemDetailDots
                 id={navigation.state.params.id}
+                adviesTitle={navigation.state.params.title}
                 navProps={navigation}
                 labels={[
                   Copy.NL.feed.setQ,
@@ -254,6 +256,26 @@ const FeedStack = createStackNavigator({
       title: 'Mijn activiteiten',
       headerStyle: [
         {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+  ScheduleReminderScreen: {
+    screen: ScheduleReminder,
+    navigationOptions: ({navigation}) => ({
+      title: 'Herinnering',
+      id: `${navigation.state.params.id || 1234}`,
+      headerStyle: [
+        {
+          overflow: 'visible',
           backgroundColor: StyleConstants.colors.blue.light,
           height: 60,
           borderBottomWidth: 0,

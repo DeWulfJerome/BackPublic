@@ -27,8 +27,11 @@ const ListItemDetailDotsContent = props => {
       <HeaderDotsContent
         text={Copy.NL.feed.setQ}
         onPress={() => {
-          console.log('pressed');
-          scheduleNotification(Date.now() + 6 * 1000);
+          props.navProps.navigate('ScheduleReminderScreen', {
+            id: props.id,
+            adviesTitle: props.adviesTitle,
+          });
+          //scheduleNotification(Date.now() + 6 * 1000);
         }}></HeaderDotsContent>
       <HeaderDotsContent
         text={Copy.NL.feed.remove}
