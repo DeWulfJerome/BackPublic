@@ -27,6 +27,7 @@ import Tips from '../screens/profile/Tips';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
+import TipItemDetail from '../screens/profile/TipItemDetail';
 
 import HeaderDots from '../components/buttons/HeaderDots';
 import ListItemDetailDotsContent from '../Views/header/ListItemDetailDotsContent';
@@ -83,7 +84,7 @@ const ProfileTabs = createMaterialTopTabNavigator(
     Cues: {
       screen: Cues,
       navigationOptions: () => ({
-        title: 'Cues',
+        title: 'Herinneringen',
       }),
     },
   },
@@ -161,6 +162,26 @@ const ProfileStack = createStackNavigator({
       ],
     }),
   },
+  TipItemDetailScreen: {
+    screen: TipItemDetail,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.title || 'Details'}`,
+
+      headerStyle: [
+        {
+          overflow: 'visible',
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
 });
 
 const FeedStack = createStackNavigator({
@@ -187,7 +208,10 @@ const FeedStack = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: `${navigation.state.params.title || 'Details'}`,
       headerRight: () => {
-        if (navigation.state.params.from !== 'AllActivityList') {
+        if (
+          navigation.state.params.from !== 'AllActivityList' &&
+          navigation.state.params.from !== 'TipsList'
+        ) {
           if (Platform.OS === 'ios') {
             return (
               <HeaderDots>
@@ -227,7 +251,7 @@ const FeedStack = createStackNavigator({
   AllActivities: {
     screen: AllActivities,
     navigationOptions: ({navigation}) => ({
-      title: 'Jouw activiteiten',
+      title: 'Mijn activiteiten',
       headerStyle: [
         {
           backgroundColor: StyleConstants.colors.blue.light,

@@ -6,7 +6,7 @@ import TipsList from '../../Views/profile/TipsList';
 const Tips = props => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <TipsList></TipsList>
+      <TipsList navProps={props.navigation}></TipsList>
     </View>
   );
 };

@@ -5,44 +5,9 @@ import {useDispatch} from 'react-redux';
 import StyleConstants from '../../StyleConstants';
 import styles from '../../styles';
 
-import {
-  setAdviesActivity,
-  setAdviesDoneToday,
-} from '../../controllers/feed/feedActions';
-
-import Button from '../../components/buttons/Button';
-
-const ListItemDetails = props => {
+const TipItemDetail = props => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
-  const didActivity = () => {
-    setLoading(true);
-    setAdviesDoneToday(props.navigation.state.params.id, true, dispatch)
-      .then(response => {
-        setLoading(false);
-        props.navigation.navigate('Feed');
-      })
-      .catch(err => {
-        alert('Something went wrong, try again later');
-        console.log(err);
-        setLoading(false);
-      });
-  };
-
-  const activateActivity = () => {
-    setLoading(true);
-    setAdviesActivity(props.navigation.state.params.id, true, dispatch)
-      .then(response => {
-        setLoading(false);
-        props.navigation.navigate('Feed');
-      })
-      .catch(err => {
-        alert('Something went wrong, try again later');
-        console.log(err);
-        setLoading(false);
-      });
-  };
 
   useEffect(() => {
     //getImage();
@@ -76,20 +41,6 @@ const ListItemDetails = props => {
         </Text>
         <Text style={styles.normalText}>{screenProps.advies}</Text>
       </View>
-      <View style={detailStyle.textContainer}>
-        {screenProps.from === 'AllActivityList' ? (
-          <Button
-            filled={true}
-            text={'Toevoegen'}
-            loading={loading}
-            onPress={activateActivity}></Button>
-        ) : screenProps.from === 'TipsList' ? null : (
-          <Button
-            filled={true}
-            text={'Voltooid'}
-            onPress={didActivity}></Button>
-        )}
-      </View>
     </ScrollView>
   );
 };
@@ -104,4 +55,4 @@ const detailStyle = StyleSheet.create({
   },
 });
 
-export default ListItemDetails;
+export default TipItemDetail;
