@@ -23,7 +23,6 @@ const ScheduleReminder = props => {
 
   useEffect(() => {
     // Get reminders from database
-    console.log(props.navigation.state.params);
     if (!getFirstReminders) {
       getReminders();
     }
