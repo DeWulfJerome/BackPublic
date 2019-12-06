@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import Copy from '../../assets/Copy';
 
 import {setAdviesActivity} from '../../controllers/feed/feedActions';
+import {scheduleNotification} from '../../controllers/feed/notificationLogic';
 
 import HeaderDotsContent from './HeaderDotsContent';
 
@@ -26,7 +27,11 @@ const ListItemDetailDotsContent = props => {
       <HeaderDotsContent
         text={Copy.NL.feed.setQ}
         onPress={() => {
-          alert('pressed');
+          props.navProps.navigate('ScheduleReminderScreen', {
+            id: props.id,
+            adviesTitle: props.adviesTitle,
+          });
+          //scheduleNotification(Date.now() + 6 * 1000);
         }}></HeaderDotsContent>
       <HeaderDotsContent
         text={Copy.NL.feed.remove}

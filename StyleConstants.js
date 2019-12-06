@@ -13,14 +13,16 @@ const StyleConstants = {
       dark: '#CA4B3C',
       medium: '#D36B5F',
       light: '#DD8C82',
+      clear: '#edc9c7',
     },
     white: '#fff',
     grey: {
       //change
       dark: '#f2f2f2',
       medium: '#f2f2f2',
-      light: '#f2f2f2',
+      light: '#f4f4f4',
     },
+
     black: {
       fontBlack: '#393D42',
       subFontBlack: '#909396',

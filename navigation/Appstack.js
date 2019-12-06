@@ -14,7 +14,6 @@ import styles from '../styles';
 import TabBar from './TabBar';
 import TabBarIcon from './TabBarIcon';
 import Feed from '../screens/main/Feed';
-import Profile from '../screens/main/Profile';
 import Badges from '../screens/main/Badges';
 import Questions from '../screens/main/Questions';
 import Stop from '../screens/main/Stop';
@@ -27,6 +26,8 @@ import Tips from '../screens/profile/Tips';
 
 import ListItemDetails from '../screens/feed/ListItemDetails';
 import AllActivities from '../screens/feed/AllActivities';
+import ScheduleReminder from '../screens/feed/ScheduleReminder';
+import TipItemDetail from '../screens/profile/TipItemDetail';
 
 import HeaderDots from '../components/buttons/HeaderDots';
 import ListItemDetailDotsContent from '../Views/header/ListItemDetailDotsContent';
@@ -83,7 +84,7 @@ const ProfileTabs = createMaterialTopTabNavigator(
     Cues: {
       screen: Cues,
       navigationOptions: () => ({
-        title: 'Cues',
+        title: 'Herinneringen',
       }),
     },
   },
@@ -161,6 +162,26 @@ const ProfileStack = createStackNavigator({
       ],
     }),
   },
+  TipItemDetailScreen: {
+    screen: TipItemDetail,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.title || 'Details'}`,
+
+      headerStyle: [
+        {
+          overflow: 'visible',
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
 });
 
 const FeedStack = createStackNavigator({
@@ -187,12 +208,16 @@ const FeedStack = createStackNavigator({
     navigationOptions: ({navigation}) => ({
       title: `${navigation.state.params.title || 'Details'}`,
       headerRight: () => {
-        if (navigation.state.params.from !== 'AllActivityList') {
+        if (
+          navigation.state.params.from !== 'AllActivityList' &&
+          navigation.state.params.from !== 'TipsList'
+        ) {
           if (Platform.OS === 'ios') {
             return (
               <HeaderDots>
                 <ListItemDetailDotsContent
                   navProps={navigation}
+                  adviesTitle={navigation.state.params.title}
                   id={navigation.state.params.id}></ListItemDetailDotsContent>
               </HeaderDots>
             );
@@ -200,6 +225,7 @@ const FeedStack = createStackNavigator({
             return (
               <AndroidListItemDetailDots
                 id={navigation.state.params.id}
+                adviesTitle={navigation.state.params.title}
                 navProps={navigation}
                 labels={[
                   Copy.NL.feed.setQ,
@@ -227,9 +253,29 @@ const FeedStack = createStackNavigator({
   AllActivities: {
     screen: AllActivities,
     navigationOptions: ({navigation}) => ({
-      title: 'Jouw activiteiten',
+      title: 'Mijn activiteiten',
       headerStyle: [
         {
+          backgroundColor: StyleConstants.colors.blue.light,
+          height: 60,
+          borderBottomWidth: 0,
+        },
+        StyleConstants.shadow.top,
+      ],
+      headerTitleStyle: [
+        styles.title,
+        {color: StyleConstants.colors.black.fontBlack},
+      ],
+    }),
+  },
+  ScheduleReminderScreen: {
+    screen: ScheduleReminder,
+    navigationOptions: ({navigation}) => ({
+      title: 'Herinnering',
+      id: `${navigation.state.params.id || 1234}`,
+      headerStyle: [
+        {
+          overflow: 'visible',
           backgroundColor: StyleConstants.colors.blue.light,
           height: 60,
           borderBottomWidth: 0,

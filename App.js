@@ -4,6 +4,8 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {StatusBar} from 'react-native';
 
+import {configureNotifications} from './controllers/feed/notificationLogic';
+
 import reducers from './Model/rootReducer';
 import StyleConstants from './StyleConstants';
 
@@ -20,6 +22,7 @@ const App = () => {
   // Disable warnings
   useEffect(() => {
     console.disableYellowBox = true;
+    configureNotifications();
   });
 
   return (

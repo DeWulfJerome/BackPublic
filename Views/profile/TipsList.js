@@ -22,7 +22,6 @@ const TipsList = props => {
 
   const getTips = () => {
     let myTips = getUserTips(allAdviezen);
-    console.log(myTips);
     setTips(myTips);
   };
 
@@ -32,14 +31,13 @@ const TipsList = props => {
         key={item.title}
         done={item.doneToday}
         onPress={() => {
-          console.log('asdf');
-          /* props.navProps.navigate('ListItemDetail', {
-                title: item.title,
-                image: 'weight',
-                from: 'FeedList',
-                advies: item.advies,
-                id: item.id,
-              });*/
+          props.navProps.navigate('TipItemDetailScreen', {
+            title: item.title,
+            image: 'weight',
+            from: 'TipsList',
+            advies: item.advies,
+            id: item.id,
+          });
         }}
         uri={getIllustration(item.category)}
         content={<TipsContent title={item.title} sub={item.sub} />}></ListItem>

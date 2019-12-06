@@ -21,7 +21,11 @@ class AndroidListItemDetailDots extends React.Component {
       () => {},
       (result, index) => {
         if (index === 0) {
-          alert('set cue');
+          this.props.navProps.navigate('ScheduleReminderScreen', {
+            id: this.props.id,
+            adviesTitle: this.props.adviesTitle,
+          });
+          //scheduleNotification(Date.now() + 6 * 1000);
         }
         if (index === 1) {
           setAdviesActivity(this.props.id, false, this.props.dispatch)
