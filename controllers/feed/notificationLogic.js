@@ -1,5 +1,6 @@
 import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import axios from 'axios';
 
 export const configureNotifications = () => {
   PushNotification.configure({
@@ -32,9 +33,37 @@ export const configureNotifications = () => {
   });
 };
 
-export const scheduleNotification = timestamp => {
+export const scheduleNotification = (timestamp, id, title, message, repeat) => {
   PushNotification.localNotificationSchedule({
-    message: 'This is a scheduled notification!',
+    title: title,
+    message: message,
+    id: id,
     date: new Date(timestamp),
+    userInfo: {id: id},
+    repeatType: repeat,
+  });
+};
+
+export const cancelNotification = id => {
+  PushNotification.cancelLocalNotifications({id: id});
+};
+
+export const setReminderDatabase = (timeString, reminderId, adviesId) => {
+  return axios.post(serverUrl + '/back-up-plan/v1/set_new_reminder', {
+    reminderId,
+    adviesId,
+    timeString,
+  });
+};
+
+export const getRemindersDatabase = adviesId => {
+  return axios.post(serverUrl + '/back-up-plan/v1/get_advies_reminders', {
+    adviesId,
+  });
+};
+
+export const removeReminderDatabase = reminderId => {
+  return axios.post(serverUrl + '/back-up-plan/v1/remove_reminder', {
+    reminderId,
   });
 };

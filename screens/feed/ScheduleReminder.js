@@ -5,29 +5,45 @@ import DateTimePicker from 'react-native-modal-datetime-picker';
 import StyleConstants from '../../StyleConstants';
 import styles from '../../styles';
 
-import {scheduleNotification} from '../../controllers/feed/notificationLogic';
+import {
+  scheduleNotification,
+  cancelNotification,
+  setReminderDatabase,
+  getRemindersDatabase,
+  removeReminderDatabase,
+} from '../../controllers/feed/notificationLogic';
 
-import Button from '../../components/buttons/Button';
 import TimeListItem from '../../components/reminders/TimeListItem';
 import AddReminderBtn from '../../components/reminders/AddReminderBtn';
 
 const ScheduleReminder = props => {
-  const [reminders, setReminders] = useState([
-    {time: '08:15', id: '4562qsdd'},
-    {time: '15:30', id: '4562d'},
-  ]);
+  const [reminders, setReminders] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [getFirstReminders, setGetFirstReminders] = useState(false);
 
   useEffect(() => {
-    //console.log(props.navigation.state.params.adviesTitle);
+    // Get reminders from database
+    console.log(props.navigation.state.params);
+    if (!getFirstReminders) {
+      getReminders();
+    }
   });
+
+  const getReminders = () => {
+    let reminders = getRemindersDatabase(props.navigation.state.params.id);
+    reminders.then(rem => {
+      let sortedReminders = sortTimes(rem.data);
+      setReminders(sortedReminders);
+      setGetFirstReminders(true);
+    });
+  };
 
   const sortTimes = times => {
     return times.sort((a, b) => {
-      let intA = a.time.split('').filter(val => {
+      let intA = a.timeString.split('').filter(val => {
         return val !== ':';
       });
-      let intB = b.time.split('').filter(val => {
+      let intB = b.timeString.split('').filter(val => {
         return val !== ':';
       });
       return intA < intB ? -1 : 1;
@@ -36,23 +52,44 @@ const ScheduleReminder = props => {
 
   const setDate = val => {
     setVisible(false);
-    let hours = new Date(val)
+    let timeString = generateTimeString(val);
+    let reminderId =
+      props.navigation.state.params.id + '-' + new Date(val).getTime();
+    let timeObj = {
+      timeString,
+      reminderId,
+    };
+    // Store reminder
+    let reminderStored = setReminderDatabase(
+      timeString,
+      reminderId,
+      props.navigation.state.params.id,
+    );
+    reminderStored.then(response => {
+      // Sort and show reminders
+      scheduleNotification(
+        new Date(val),
+        reminderId,
+        props.navigation.state.params.adviesTitle,
+        'Tijd om aan je rug te werken!',
+        'day',
+      );
+      let newReminders = [...reminders, timeObj];
+      let sortedReminders = sortTimes(newReminders);
+      setReminders(sortedReminders);
+    });
+  };
+
+  const generateTimeString = time => {
+    let hours = new Date(time)
       .getHours()
       .toString()
       .padStart(2, '0');
-    let mins = new Date(val)
+    let mins = new Date(time)
       .getMinutes()
       .toString()
       .padStart(2, '0');
-    let time = hours + ':' + mins;
-    let timeObj = {
-      time,
-      id: new Date(val).getTime(),
-    };
-    let newReminders = [...reminders, timeObj];
-    let sortedReminders = sortTimes(newReminders);
-    setReminders(sortedReminders);
-    //scheduleNotification(new Date(val));
+    return hours + ':' + mins;
   };
 
   const renderTimePicker = () => {
@@ -76,11 +113,16 @@ const ScheduleReminder = props => {
   };
 
   const removeReminder = id => {
-    let newReminders = reminders.filter(val => {
-      return val.id !== id;
-    });
+    removeReminderDatabase(id).then(response => {
+      if (response.data == 1) {
+        cancelNotification(id);
+        let newReminders = reminders.filter(val => {
+          return val.reminderId !== id;
+        });
 
-    setReminders(newReminders);
+        setReminders(newReminders);
+      }
+    });
   };
 
   const renderAddReminder = () => {
@@ -96,9 +138,9 @@ const ScheduleReminder = props => {
     return (
       <TimeListItem
         onPress={() => {
-          removeReminder(item.id);
+          removeReminder(item.reminderId);
         }}
-        text={item.time}
+        text={item.timeString}
       />
     );
   };
@@ -120,9 +162,11 @@ const ScheduleReminder = props => {
       </View>
       <View style={{flex: 1}}>
         <FlatList
+          onRefresh={() => {}}
+          refreshing={!getFirstReminders}
           data={reminders}
           renderItem={renderReminders}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.reminderId}
           ListFooterComponent={renderAddReminder}
         />
       </View>
